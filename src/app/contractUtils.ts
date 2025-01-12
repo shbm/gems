@@ -29,20 +29,23 @@ export const getGemsNFTContract = () => {
 
 export const mintToken = async (recipient: string, tokenId: number) => {
     try {
-      const contract = getGemsNFTContract();
-      console.log("Signer:", contract.signer);
-      console.log("Contract Address:", contract.address);
-  
-      const tx = await contract.mint(recipient, tokenId);
-      console.log("Transaction sent:", tx);
-      await tx.wait();
-      return "Token minted successfully!";
+        const contract = getGemsNFTContract();
+        console.log("Signer:", contract.signer);
+        console.log("Contract Address:", contract.address);
+
+        const tx = await contract.mint(recipient, tokenId);
+        console.log("Transaction sent:", tx);
+        await tx.wait();
+        return "Token minted successfully!";
     } catch (error) {
-      console.error("Minting failed:", error);
-      throw new Error("Minting failed: " + error.message);
+        console.error("Minting failed:", error);
+        if (error instanceof Error) {
+            throw new Error("Minting failed: " + error.message);
+        } else {
+            throw new Error("Minting failed: An unknown error occurred.");
+        }
     }
-  };
-  
+};
 
   export const forgeToken = async (id: number) => {
     try {
@@ -52,10 +55,13 @@ export const mintToken = async (recipient: string, tokenId: number) => {
       await tx.wait();
       return "Forge successful!";
     } catch (error) {
-      console.error("Forge failed:", error);
-      throw new Error("Forge failed: " + error.message);
-    }
-  };
+        console.error("Minting failed:", error);
+        if (error instanceof Error) {
+            throw new Error("Minting failed: " + error.message);
+        } else {
+            throw new Error("Minting failed: An unknown error occurred.");
+        }
+    }  };
   
 
 export const tradeTokens = async (tradeIn: number, tradeTo: number) => {
@@ -65,9 +71,12 @@ export const tradeTokens = async (tradeIn: number, tradeTo: number) => {
     console.log("Trade transaction sent:", tx);
     await tx.wait();
     return {"from": tradeIn, "to": tradeTo};
-  } catch (error) {
-    console.error("Trade failed:", error);
-    throw new Error("Trade failed: " + error.message);
-  }
-};
+} catch (error) {
+    console.error("Minting failed:", error);
+    if (error instanceof Error) {
+        throw new Error("Minting failed: " + error.message);
+    } else {
+        throw new Error("Minting failed: An unknown error occurred.");
+    }
+}};
   

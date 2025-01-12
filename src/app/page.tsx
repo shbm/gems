@@ -73,18 +73,24 @@ const Page = () => {
 
   const handleTrade = async () => {
     if (!account) {
-      setTradeResult("Please connect your wallet to trade tokens.");
-      return;
+        setTradeResult("Please connect your wallet to trade tokens.");
+        return;
     }
 
     setLoadingTrade(true); // Set loading for trading to true
     try {
-      const result = await tradeTokens(tradeFrom, tradeTo);
-      setTradeResult(`Trade successful! Result: ${tokenNames[result["from"]]} to ${tokenNames[result["to"]]}`);
+        const result = await tradeTokens(tradeFrom, tradeTo);
+        setTradeResult(
+            `Trade successful! Result: ${tokenNames[result["from"]]} to ${tokenNames[result["to"]]}`
+        );
     } catch (error) {
-      setTradeResult(error.message);
+        if (error instanceof Error) {
+            setTradeResult(error.message);
+        } else {
+            setTradeResult("An unknown error occurred.");
+        }
     } finally {
-      setLoadingTrade(false); // Set loading for trading to false after the process
+        setLoadingTrade(false); // Set loading for trading to false after the process
     }
   };
 

@@ -1,3 +1,9 @@
+### play with the app: https://gems-green.vercel.app/
+
+### Gems Contract: https://sepolia.etherscan.io/address/0x04014e1cefbbd1bc2f4abe51c4dcb14d387df875
+### Gems Logic Contract: https://sepolia.etherscan.io/address/0x83246d05ab6ac7b977e1a1e2cff8c9ad2a19aedc
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

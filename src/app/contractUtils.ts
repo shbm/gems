@@ -7,13 +7,12 @@ const GEMS_FORGING_LOGIC_ADDRESS = "0x83246d05aB6aC7B977E1A1e2cFF8C9ad2a19AeDc";
 const GEMS_NFT_ADDRESS = "0x04014e1ceFBbD1BC2f4AbE51C4DCb14d387dF875";
 
 export const getProvider = () => {
-    if (!window.ethereum) {
-      throw new Error("MetaMask is not installed!");
-    }
-    return new ethers.providers.Web3Provider(window.ethereum);
-  };
-  
-  
+  if (!window.ethereum) {
+    throw new Error("MetaMask is not installed!");
+  }
+  return new ethers.providers.Web3Provider(window.ethereum);
+};
+
 export const getGemsForgingLogicContract = () => {
   const provider = getProvider();
   const signer = provider.getSigner();
@@ -26,43 +25,42 @@ export const getGemsNFTContract = () => {
   return new ethers.Contract(GEMS_NFT_ADDRESS, GemsNFTABI, signer);
 };
 
-
 export const mintToken = async (recipient: string, tokenId: number) => {
-    try {
-        const contract = getGemsNFTContract();
-        console.log("Signer:", contract.signer);
-        console.log("Contract Address:", contract.address);
+  try {
+    const contract = getGemsNFTContract();
+    console.log("Signer:", contract.signer);
+    console.log("Contract Address:", contract.address);
 
-        const tx = await contract.mint(recipient, tokenId);
-        console.log("Transaction sent:", tx);
-        await tx.wait();
-        return "Token minted successfully!";
-    } catch (error) {
-        console.error("Minting failed:", error);
-        if (error instanceof Error) {
-            throw new Error("Minting failed: " + error.message);
-        } else {
-            throw new Error("Minting failed: An unknown error occurred.");
-        }
+    const tx = await contract.mint(recipient, tokenId);
+    console.log("Transaction sent:", tx);
+    await tx.wait();
+    return "Token minted successfully!";
+  } catch (error) {
+    console.error("Minting failed:", error);
+    if (error instanceof Error) {
+        throw new Error("Minting failed: " + error.message);
+    } else {
+        throw new Error("Minting failed: An unknown error occurred.");
     }
+  }
 };
 
-  export const forgeToken = async (id: number) => {
-    try {
-      const contract = getGemsForgingLogicContract();
-      const tx = await contract.forge(id);
-      console.log("Forge transaction sent:", tx);
-      await tx.wait();
-      return "Forge successful!";
-    } catch (error) {
-        console.error("Minting failed:", error);
-        if (error instanceof Error) {
-            throw new Error("Minting failed: " + error.message);
-        } else {
-            throw new Error("Minting failed: An unknown error occurred.");
-        }
-    }  };
-  
+export const forgeToken = async (id: number) => {
+  try {
+    const contract = getGemsForgingLogicContract();
+    const tx = await contract.forge(id);
+    console.log("Forge transaction sent:", tx);
+    await tx.wait();
+    return "Forge successful!";
+  } catch (error) {
+    console.error("Minting failed:", error);
+    if (error instanceof Error) {
+        throw new Error("Minting failed: " + error.message);
+    } else {
+        throw new Error("Minting failed: An unknown error occurred.");
+    }
+  }
+};
 
 export const tradeTokens = async (tradeIn: number, tradeTo: number) => {
   try {
@@ -71,12 +69,12 @@ export const tradeTokens = async (tradeIn: number, tradeTo: number) => {
     console.log("Trade transaction sent:", tx);
     await tx.wait();
     return {"from": tradeIn, "to": tradeTo};
-} catch (error) {
+  } catch (error) {
     console.error("Minting failed:", error);
     if (error instanceof Error) {
         throw new Error("Minting failed: " + error.message);
     } else {
         throw new Error("Minting failed: An unknown error occurred.");
     }
-}};
-  
+  }
+};

@@ -2,7 +2,6 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { getProvider } from "./contractUtils";
-import { ethers } from "ethers";
 
 interface BlockchainContextProps {
   account: string | null;

@@ -17,7 +17,7 @@ const tokenNames: Record<number, string> = {
 };
 
 const Page = () => {
-  const { account, connectWallet } = useBlockchain();
+  const { account, connectWallet, balance, isCorrectNetwork, switchToSepolia } = useBlockchain();
   const [mintResult, setMintResult] = useState<string>("");
   const [tokenId, setTokenId] = useState<number>(1);
   const [forgeResult, setForgeResult] = useState<string>("");
@@ -100,7 +100,25 @@ const Page = () => {
       {!account ? (
         <button className="button" onClick={connectWallet}>Connect Your Wallet</button>
       ) : (
-        <p className="connected">You are connected as: <strong>{account}</strong></p>
+        <div className="connected">
+          <p>You are connected as: <strong>{account}</strong></p>
+          <div className="eth-balance">
+            <img 
+              src="https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png" 
+              alt="ETH" 
+              className="eth-logo"
+            />
+            <strong>{balance} ETH</strong>
+          </div>
+          {!isCorrectNetwork && (
+            <div className="network-warning">
+              <p>⚠️ Please switch to Sepolia Test Network</p>
+              <button className="button switch-network" onClick={switchToSepolia}>
+                Switch to Sepolia
+              </button>
+            </div>
+          )}
+        </div>
       )}
 
       <div className="section">

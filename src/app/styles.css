@@ -86,6 +86,22 @@ body {
     font-size: 1.1rem;
 }
 
+.eth-balance {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+    color: #627EEA;
+    font-size: 1.1rem;
+}
+
+.eth-logo {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
 .token-images {
     display: flex;
     justify-content: center;
@@ -160,4 +176,27 @@ body {
 
 .radio-label input {
     margin-top: 5px;
+}
+
+.network-warning {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 5px;
+    color: #856404;
+}
+
+.network-warning p {
+    margin: 0 0 10px 0;
+    font-weight: bold;
+}
+
+.switch-network {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.switch-network:hover {
+    background-color: #e0a800;
 }

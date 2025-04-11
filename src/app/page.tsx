@@ -136,7 +136,11 @@ const Page = () => {
           ))}
         </div>
         {loadingMint && <div className="loading"><div className="spinner"></div></div>}
-        <p className="result">{mintResult}</p>
+        {mintResult && (
+          <div className={mintResult.includes("successfully") ? "success-message" : "result"}>
+            {mintResult}
+          </div>
+        )}
       </div>
 
       <div className="section">
@@ -154,7 +158,11 @@ const Page = () => {
           ))}
         </div>
         {loadingForge && <div className="loading"><div className="spinner"></div></div>}
-        <p className="result">{forgeResult}</p>
+        {forgeResult && (
+          <div className={forgeResult.includes("successfully") ? "success-message" : "result"}>
+            {forgeResult}
+          </div>
+        )}
       </div>
 
       <div className="section">
@@ -204,8 +212,12 @@ const Page = () => {
           </div>
         </div>
         <button className="button" onClick={handleTrade}>Trade</button>
-        {loadingTrade && <div className="loading"><div className="spinner"></div></div>} {/* Spinner for trading */}
-        <p className="result">{tradeResult}</p>
+        {loadingTrade && <div className="loading"><div className="spinner"></div></div>}
+        {tradeResult && (
+          <div className={tradeResult.includes("successful") ? "success-message" : "result"}>
+            {tradeResult}
+          </div>
+        )}
       </div>
     </div>
   );
